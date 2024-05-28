@@ -72,6 +72,19 @@ namespace StorageLib.Services
             return item;
         }
 
+        public bool returnId(int ID)
+        {
+            var itemToFind = items.Count(c => c.Id == ID);
+            if (ID == itemToFind)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void Delete(int id)
         {
             if (items == null)

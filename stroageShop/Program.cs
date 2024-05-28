@@ -9,12 +9,14 @@ namespace StorageShop
         static void Main(string[] args)
         {
             var itemShop = ItemService.Current;
+            var shoppingCart = new List<int>();
 
             itemShop.AddOrUpdate(new Item
             {
                 Name = "Food",
                 Description = "A piece of food",
-                Price = "4"
+                Price = "4",
+                NumAvailable = 1
             });
             string managementMenuOption;
             do {
@@ -48,23 +50,28 @@ namespace StorageShop
                     }
                     else if (itemOption == "U" || itemOption == "u")
                     {
-
+                        Console.WriteLine("Input name of item to update.");
+                        string updateInput = Console.ReadLine();
+                        Console.WriteLine("Input Description then Price.");
+                        itemShop.AddOrUpdate(new Item
+                        {
+                            Name = updateInput,
+                            Description = Console.ReadLine(),
+                            Price = Console.ReadLine(),
+                            NumAvailable = 1
+                        });
                     }
                     else if (itemOption == "D" || itemOption == "d")
                     {
                         itemShop?.Items?.ToList()?.ForEach(Console.WriteLine);
                         Console.WriteLine("Which item to delete? (Input ID)");
 
-                        //int deleteId = Convert.ToInt32(Console.ReadLine());
+                        int deleteId = Convert.ToInt32(Console.ReadLine());
 
-                            //if (itemShop.id == deleteId)
-                            //{
-                            //    itemShop.Delete(deleteId);
-                            //    itemShop?.Items?.ToList()?.ForEach(Console.WriteLine);
-                       //else
-                       //{
-                            //Console.WriteLine("Item of ID: [", +deleteId, "] not found");
-                        //}
+                        itemShop.Delete(deleteId);
+                        itemShop?.Items?.ToList()?.ForEach(Console.WriteLine);
+
+                        //Console.WriteLine("Item of ID: [", +deleteId, "] not found");
                     }
                     else
                     {
@@ -82,15 +89,38 @@ namespace StorageShop
                     {
                         Console.WriteLine("Input the id of the item to add.");
                         int addItemId = Convert.ToInt32(Console.ReadLine());
-                        //if
+                        if (itemShop.returnId(addItemId))
+                        {
+                            shoppingCart.Add(addItemId);
+                            //shoppingCart?.ToList()?.ForEach(Console.WriteLine); For testing
+
+                        }
                     }
                     else if (shopOption == "R" || shopOption == "r")
                     {
+                        Console.WriteLine("Input the id of the item to remove.");
+                        int removeItemId = Convert.ToInt32(Console.ReadLine());
+                        if(itemShop.returnId(removeItemId))
+                        {
+                            shoppingCart.Remove(removeItemId);
+                            //shoppingCart?.ToList()?.ForEach(Console.WriteLine); for testing
 
+                        }
                     }
                     else if (shopOption == "C" || shopOption == "c")
                     {
+                        //Checkout Procedure
 
+                        //itemShop?.Items?.ToList()?.ForEach(item.Price)
+                        //int cartTotal;
+                        //double taxTotal = (cartTotal * 0.07);
+                        //double finalTotal = (cartTotal + taxTotal);
+
+
+
+                        //Console.WriteLine("Subtotal: " + cartTotal);
+                        //Console.WriteLine("Taxes: " + taxTotal);
+                        //Console.WriteLine("Your Total: " + finalTotal);
                     }
 
 
@@ -104,28 +134,6 @@ namespace StorageShop
                     Console.WriteLine("Invalid Input");
                 }
             } while (managementMenuOption != "C" || managementMenuOption != "c");
-
-
-
-
-
-
-
-
-
-
-            //Checkout Procedure
-
-            //itemShop?.Items?.ToList()?.ForEach(item.Price)
-            //int cartTotal;
-            //double taxTotal = (cartTotal * 0.07);
-            //double finalTotal = (cartTotal + taxTotal);
-
-
-
-            //Console.WriteLine("Subtotal: " + cartTotal);
-            //Console.WriteLine("Taxes: " + taxTotal);
-            //Console.WriteLine("Your Total: " + finalTotal);
         }
     }
 }
