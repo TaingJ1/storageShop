@@ -116,16 +116,16 @@ namespace StorageShop
 
             //Checkout Procedure
 
-            itemShop?.Items?.ToList()?.ForEach(item.Price)
-            int cartTotal =  ;
-            double taxTotal = (cartTotal * 0.07);
-            double finalTotal = (cartTotal + taxTotal);
+            //itemShop?.Items?.ToList()?.ForEach(item.Price)
+            //int cartTotal;
+            //double taxTotal = (cartTotal * 0.07);
+            //double finalTotal = (cartTotal + taxTotal);
 
 
 
-                Console.WriteLine("Subtotal: " + cartTotal);
-            Console.WriteLine("Taxes: " + taxTotal);
-            Console.WriteLine("Your Total: " + finalTotal);
+            //Console.WriteLine("Subtotal: " + cartTotal);
+            //Console.WriteLine("Taxes: " + taxTotal);
+            //Console.WriteLine("Your Total: " + finalTotal);
         }
     }
 }
